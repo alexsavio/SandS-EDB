@@ -1,0 +1,35 @@
+
+server=http://127.0.0.1:8080/api
+
+req_hjson="Content-Type:application/json"
+req_hxml="Content-Type:application/xml"
+
+resp_hjson="Accept:application/json"
+resp_hxml="Accept:application/xml"
+
+header='json'
+#header='xml'
+if [ $header == 'json' ]
+then
+    H=${req_hjson}
+elif [ $header == 'xml' ]
+then
+    H=${req_hxml}
+fi
+
+
+curl -H ${H} -X GET ${server}/user
+
+curl -H ${req_hjson} -X POST -d '{"name": "alexsavio", "age":31}' -i ${server}/user
+
+curl -H ${H} -i ${server}/user
+
+curl -i ${server}/user/529e0fcab93af65cf5c7f919
+
+curl -H ${req_hjson} -i ${server}/user/52a5d47db93af6517de9b336
+
+#PATCHING:
+#copy the etag
+etag_match="If-Match:3d4b3aa11bbb0652775ee92895c3de89da1f03bc"
+
+curl -H ${req_hjson} -H ${etag_match} -X PATCH -d '{"age":31}' -i ${server}/user/52a5d47db93af6517de9b336

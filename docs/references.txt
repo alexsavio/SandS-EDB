@@ -1,0 +1,11 @@
+http://docs.mongodb.org/ecosystem/tutorial/write-a-tumblelog-application-with-flask-mongoengine/
+http://www.sixfeetup.com/blog/4-python-web-frameworks-compared
+http://lucumr.pocoo.org/2013/2/13/moar-classes/
+http://bottlepy.org/docs/dev/index.html
+http://docs.mongodb.org/manual/data-modeling/
+
+https://education.mongodb.com/courses/10gen/M101P/2013_November/courseware/Week_1_Introduction/Homework_1.1/
+https://pypi.python.org/pypi/jsonschema
+https://github.com/bcwaldon/warlock
+http://tox.readthedocs.org/en/latest/
+http://python-eve.org/

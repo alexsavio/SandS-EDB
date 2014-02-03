@@ -1,0 +1,29 @@
+{ "_id" : "request2", 
+"eahouker" : "eahouker2", 
+"engAppliance" : "engAppliance1", 
+"date" : "2014-1-03", 
+"time" : "13.58", 
+"action" : "cook bread", 
+"status" : "waitingForExecution", 
+ 
+			"parameters" : [ {  "name" : "bread type", "value" : "white" }, 
+			                {  "name" : "bread texture", "value" : "soft" } ],
+			
+			"recipe" : { "_id" : "recipe2", 
+             "istructions" : [ {"name" : "MOTOR ON", "type" : "**??**", "value" : "**??**", "duration" : "**??**"}, 
+			                  { "name" : "WAIT 1s", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "MOTOR OFF", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "WAIT 1s", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "MOTOR ON", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "WAIT 30m", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "SET TEMPERATURE 180", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "HEATER ON", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "WAIT 1h", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "SET TEMPERATURE 220", "type" : "**??**", "value" : "**??**", "duration" : "**??**"} , 
+							  { "name" : "WAIT 10m", "type" : "**??**", "value" : "**??**", "duration" : "**??**" }, 
+							  { "name" : "HEATER OFF", "type" : "**??**", "value" : "**??**", "duration" : "**??**" } ] }, 
+			
+			
+			
+			
+				}

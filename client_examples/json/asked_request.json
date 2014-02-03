@@ -1,0 +1,12 @@
+{ "_id" : "request2", 
+"eahouker" : "eahouker2", 
+"engAppliance" : "engAppliance1", 
+"date" : "2014-1-03", 
+"time" : "13.58", 
+"action" : "cook bread", 
+"status" : "waitingRecipe", 
+ 
+			"parameters" : [ {  "name" : "bread type", "value" : "white" }, 
+			                {  "name" : "bread texture", "value" : "soft" } ],
+			
+				}

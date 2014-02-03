@@ -1,0 +1,15 @@
+{ "_id" : "eahouker1", 
+"username" : "bruno", 
+"pwd" : "pass", 
+"birthday" : "1950-06-16", 
+"sex" : "male", 
+"numChildren" : 3, 
+"socialStatus" : "married", 
+"preferences" : [ { "criterion" : "white bread", "value" : "agree" }, 
+                  { "criterion" : "soft bread", "value" : "neutral" }, 
+				  { "criterion" : "cornmeal bread", "value" : "notAgree" }, 
+				  { "criterion" : "little salt bread", "value" : "agree" }, 
+				  { "criterion" : "big salt bread", "value" : "notAgree" } 
+				] 
+}
+
