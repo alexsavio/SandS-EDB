@@ -26,7 +26,7 @@ if hn == 'gicSands':
     MONGO_DBNAME = mongo_sands_db
 
     # let's not forget the API entry point
-    SERVER_NAME = localhost_server_name
+    SERVER_NAME = server_name
     URL_PREFIX = 'api'
 
 elif hn == 'buccaneer':
