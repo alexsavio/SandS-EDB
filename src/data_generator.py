@@ -5,7 +5,7 @@ import sys
 import socket
 hn = socket.gethostname()
 if hn == 'ayerdi':
-    sys.path.append('/home/ayerdi/Escritorio/')
+    sys.path.append('/home/ayerdi/Dropbox/SandS-EDB/src')
 else:    
     basedir = os.path.abspath(os.path.dirname(__file__))
     sys.path.append(os.path.join(basedir))
@@ -65,17 +65,17 @@ insert.status = 'waitingRecipe'
 lista = []
 for examples in Parameter.objects:
     lista.append(examples)
-insert.Parameters = examples
+insert.Parameters = lista
 # ListField(ReferenceField(Evaluation))
 lista = []
 for examples in Evaluation.objects:
     lista.append(examples)
-insert.Evaluations = examples
+insert.Evaluations = lista
 # ListField(ReferenceField(Warningmsg))
 lista = []
 for examples in Warningmsg.objects:
     lista.append(examples)
-insert.Warningmsgs = examples
+insert.Warningmsgs = lista
 insert.save()
 
 
