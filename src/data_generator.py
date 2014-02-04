@@ -3,6 +3,8 @@ import os
 import sys
 
 import socket
+from mongoengine import *
+
 hn = socket.gethostname()
 if hn == 'ayerdi':
     sys.path.append('/home/ayerdi/Dropbox/SandS-EDB/src')
@@ -16,7 +18,7 @@ from keys import host_ip, generator_db, \
 connect(generator_db, host=host_ip, 
         username=generator_user, password=generator_password)
 
-from mongoengine import *
+
 from mongoengine_models import *
 
 # Preference no depende de nadie
