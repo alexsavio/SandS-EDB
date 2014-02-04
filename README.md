@@ -1,4 +1,8 @@
-SandS-EDB
+sands-edb
 =========
 
-Data web service for the European project SandS
+Sands project - Ehouker Database
+
+https://api.sands-social-network-mockup.com/docs
+
+https://api.sands-social-network-mockup.com/api
