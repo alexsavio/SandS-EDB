@@ -111,14 +111,15 @@ Eahouker = {
             'type': 'string',
             'allowed': ['single', 'married', 'separated'],
         },
-        'Preference': {
+        'Preferences': {
             'type': 'list',
             'schema': {'type': 'objectid'}
         },
-        'Request': {
+        'Requests': {
             'type': 'list',
             'schema': {'type': 'objectid'}
         },
+        'Location': {'type': 'objectid'},
     },
 }
 DOMAIN['Eahouker'] = Eahouker
@@ -132,7 +133,7 @@ Preference = {
             'type': 'string',
             'allowed': ['agree', 'neutral', 'disagree', 'partialAgree', 'partialDisagree'],
         },
-
+        'Eahouker' : {'type': 'objectid'},
     },
 }
 DOMAIN['Preference'] = Preference
@@ -161,7 +162,8 @@ Request = {
             'type': 'list',
             'schema': {'type': 'objectid'}
         },
-
+        'Recipe': {'type': 'objectid'},
+#        'Eahouker': {'type': 'objectid'},
     },
 }
 #about recipes
@@ -184,7 +186,7 @@ Evaluation = {
         'criterion': {'type': 'string',},
         'value': {
             'type': 'string',
-            'allowed': ['agree', 'neutral', 'disagree', 'partialAgree', 'partialDisagree'],
+            'allowed': ['optimum', 'good', 'neutral', 'bad', 'verybad'],
         },
     }
 }
@@ -208,10 +210,10 @@ Recipe = {
         'numExecutions': {'type': 'integer',},
         'qualityIndex': {'type': 'float',},
         'isBasic': {'type': 'bool',},
-        'Requests': {
-            'type': 'list',
-            'schema': {'type': 'objectid'}
-        },
+#        'Requests': {
+#            'type': 'list',
+#            'schema': {'type': 'objectid'}
+#        },
         'Instructions': {
             'type': 'list',
             'schema': {'type': 'objectid'}
@@ -250,10 +252,10 @@ Manufacturer = {
         'pwd': {'type': 'string',},
         'url': {'type': 'string',},
 
-        'ApplianceModels': {
-            'type': 'list',
-            'schema': {'type': 'objectid'}
-        },
+#        'ApplianceModels': {
+#            'type': 'list',
+#            'schema': {'type': 'objectid'}
+#        },
     },
 }
 DOMAIN['Manufacturer'] = Manufacturer
@@ -268,6 +270,7 @@ EngagedAppliance = {
         'encrKey': {'type': 'string',},
 
         'ApplianceModel': {'type': 'objectid',},
+        'Location': {'type', 'objectid',},
 
         'Requests': {
             'type': 'list',
@@ -295,14 +298,23 @@ Location = {
 
         'ipAddress': {'type': 'string',},
 
-        'EngagedAppliances': {
+        'HomeRules': {
             'type': 'list',
             'schema': {'type': 'objectid'}
         },
-        'Eahoukers': {
+        'HomeRuleFormats': {
             'type': 'list',
             'schema': {'type': 'objectid'}
         },
+
+#        'EngagedAppliances': {
+#            'type': 'list',
+#            'schema': {'type': 'objectid'}
+#        },
+#        'Eahoukers': {
+#            'type': 'list',
+#            'schema': {'type': 'objectid'}
+#        },
     },
 }
 DOMAIN['Location'] = Location
@@ -340,18 +352,30 @@ ApplianceModel = {
         'brand': {'type': 'string',},
         'model': {'type': 'string',},
         'certification': {'type': 'string',},
+        'Manufacturer': {'type': 'objectid'},
 
         'consume': {
             'nullable': True,
             'type': 'dict',
             'schema': {
-                'gas': {'type': 'integer',},
-                'power': {'type': 'integer',},
-                'water': {'type': 'integer',},
-                'temperature': {'type': 'integer',},
+                'gas': {'type': 'float',},
+                'power': {'type': 'float',},
+                'water': {'type': 'float',},
+                'temperature': {'type': 'float',},
             },
         },
-        'actions': {
+
+        'TechnicalData': {
+            'nullable': True,
+            'type': 'dict',
+            'schema': {
+                'power': {'type': 'string',},
+                'inletWaterFlow': {'type': 'string',},
+                'maxInletWaterPressure': {'type': 'string',},
+            },
+        },
+
+        'action': {
             'type': 'list',
             'schema': {'type': 'string'}
         },
@@ -368,6 +392,10 @@ ApplianceModel = {
             'schema': {'type': 'string'}
         },
         'BasicRecipes': {
+            'type': 'list',
+            'schema': {'type': 'objectid'}
+        },
+        'InstructionTypes': {
             'type': 'list',
             'schema': {'type': 'objectid'}
         },
@@ -389,49 +417,47 @@ BasicRecipe = {
 DOMAIN['BasicRecipe'] = BasicRecipe
 
 
-InstructionDefault = {
+Instruction = {
     'allow_unknown': True,
 
     'schema': {
-        'type': {'type': 'integer',},
         'name': {'type': 'string',},
-
-        'rangeContinuous': {
-            'nullable': True,
-            'type': 'dict',
-            'schema': {
-                'minValue': {'type': 'integer',},
-                'maxValue': {'type': 'integer',},
-                'step': {'type': 'integer',},
-                'defaultValue': {'type': 'integer',},
-            },
-        },
-
-        'rangeDiscrete': {
-            'type': 'list',
-            'schema': {'type': 'objectid'},
-            'nullable': True,
-        },
+        'value': {'type': 'integer',},
     },
 }
-DOMAIN['InstructionDefault'] = InstructionDefault
+DOMAIN['Instruction'] = Instruction
 
 
-InstructionForAppliance = {
+RangeType = {
+        'allow_unknown': True,
+        'schema': {
+            'type': {'type': 'string'},
+            'continuous': {
+                'nullable': True,
+                'type': 'dict',
+                'schema': {
+                    'minValue': {'type': 'integer',},
+                    'maxValue': {'type': 'integer',},
+                    'step': {'type': 'integer',},
+                    'defaultValue': {'type': 'integer',},
+                },
+            },
+            'discrete': {
+                'nullable': True,
+                'type': 'list',
+                'schema': {'type': 'string'},
+            },
+        },
+}
+DOMAIN['RangeType'] = RangeType
+
+
+InstructionType = {
     'allow_unknown': True,
     'schema': {
-        'Instruction': {
-            'type': 'objectid',
-            'required': True,
-        },
-        'range': {
-            'type': 'dict',
-            'schema': {
-                'range': {'type': 'string'},
-                'accuracy': {'type': 'string'},
-            },
-        },
+        'name': {'type': 'string'},
+        'range': {'type', 'objectid'},
     },
 }
+DOMAIN['InstructionType'] = InstructionType
 
-DOMAIN['InstructionForAppliance'] = InstructionForAppliance

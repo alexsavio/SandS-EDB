@@ -41,7 +41,7 @@ class Parameter(Document):
 # Evaluation
 class Evaluation(Document):
     criterion = StringField()
-    value = StringField(choices=('agree', 'neutral', 'disagree', 'partialAgree', 'partialDisagree'))
+    value = StringField(choices=('optimum', 'good', 'neutral', 'bad', 'verybad'))
 
 # Warningmsg
 class Warningmsg(Document):
@@ -88,10 +88,8 @@ class Recipe(Document):
     Instructions = ListField(ReferenceField(Instruction))
 
 # InstructionForAppliance
-class Instruction(Document):
-    # RangeDiscrete
-    #Instruction = ListField(ReferenceField(rangeDiscrete))
-    Instruction = ListField(IntField())   
+class InstructionForAppliance(Document):
+    Instruction = ReferenceField(Instruction))
     range = DictField(default={'range':'', 'accuracy':''})
 
 # BasicRecipe
@@ -106,6 +104,7 @@ class ApplianceModel(Document):
     consume = DictField(default={'gas':0, 'power':0,'water':0,'temperature':0})
     actions = ListField(StringField())
     criteria = ListField(StringField())
+    technicalData = DictField(default={'power':'', 'inletWaterFlow':'','maxInletWaterPressure':''})
     exceptions = ListField(StringField())
     events = ListField(StringField())
     BasicRecipes = ListField(ReferenceField(BasicRecipe))

@@ -20,65 +20,205 @@ connect(generator_db, host=host_ip,
 
 
 from mongoengine_models import *
+from random import randrange
 
-# Preference no depende de nadie
-insert = Preference()
-# StringField()
-insert.criterion = 'Preference 1'
-# 'agree', 'neutral', 'disagree', 'partialAgree', 'partialDisagree'
-insert.value = 'agree'
-insert.save()
+##########################
+# NO TIENEN DEPENDENCIAS #
+##########################
 
-# Parameter no depende de nadie
-insert = Parameter()
-# StringField()
-insert.name = 'Name 1'
-# StringField()
-insert.value = 'Value 1'
-insert.save()
+def gen_Preference():
+    insert = Preference()
+    # MODIFY
+    v1 = ['Criterion 1', 'Criterion 2', 'Criterion 3', 'Criterion 4', 'Criterion 5']
+    # NOT MODIFY
+    v2 = ['agree', 'neutral', 'disagree', 'partialAgree', 'partialDisagree']
+    insert.criterion = v1[randrange(len(v1))]
+    insert.value = v2[randrange(len(v2))]
 
-# Evaluation no depende de nadie
-insert = Evaluation()
-# StringField()
-insert.criterion = 'Evaluation 1'
-# 'agree', 'neutral', 'disagree', 'partialAgree', 'partialDisagree'
-insert.value = 'agree'
-insert.save()
+    insert.save()
+    return insert
 
-# Warningmsg no depende de nadie
-insert = Warningmsg()
-# StringField()
-insert.message = 'Message 1'
-IntField()
-insert.instructionNum = 1
-insert.save()
+def gen_Parameter():
+    insert = Parameter()
+    # MODIFY
+    v1 = ['Name 1', 'Name 2', 'Name 3', 'Name 4', 'Name 5']
+    # MODIFY
+    v2 = ['Value 1', 'Value 2', 'Value 3', 'Value 4', 'Value 5']
+    insert.name = v1[randrange(len(v1))]
+    insert.value = v2[randrange(len(v2))]
 
-# Request
-insert = Request()
-# DayDateField
-insert.date = '03/02/2014'
-# StringField
-insert.action = 'clean'
-# DayHourField
-insert.time = '10:20:45'
-# 'waitingRecipe', 'waitingForExecution', 'executing', 'feedback', 'error', 'complete'
-insert.status = 'waitingRecipe'
-# ListField(ReferenceField(Parameter))
-lista = []
-for examples in Parameter.objects:
-    lista.append(examples)
-insert.Parameters = lista
-# ListField(ReferenceField(Evaluation))
-lista = []
-for examples in Evaluation.objects:
-    lista.append(examples)
-insert.Evaluations = lista
-# ListField(ReferenceField(Warningmsg))
-lista = []
-for examples in Warningmsg.objects:
-    lista.append(examples)
-insert.Warningmsgs = lista
-insert.save()
+    insert.save()
+    return insert    
+
+def gen_Evaluation():
+    insert = Evaluation()
+    # MODIFY
+    v1 = ['Criterion 1', 'Criterion 2', 'Criterion 3', 'Criterion 4', 'Criterion 5']
+    # NOT MODIFY
+    v2 = ['optimum', 'good', 'neutral', 'bad', 'verybad']
+    insert.criterion = v1[randrange(len(v1))]
+    insert.value = v2[randrange(len(v2))]
+
+    insert.save()
+    return insert
+
+def gen_Warningmsg():
+    insert = Warningmsg()
+    # MODIFY
+    v1 = ['Message 1', 'Message 2', 'Message 3', 'Message 4', 'Message 5']
+    # MODIFY
+    v2 = [1,2,3,4,5]
+    insert.message = v1[randrange(len(v1))]
+    insert.instructionNum = v2[randrange(len(v2))]
+    insert.save()
+    return insert
+
+def gen_Instruction():
+    insert = Instruction()
+    # MODIFY
+    v1 = ['Name 1', 'Name 2', 'Name 3', 'Name 4', 'Name 5']
+    # MODIFY
+    v2 = ['Value 1', 'Value 2', 'Value 3', 'Value 4', 'Value 5']
+    # MODIFY
+    v3 = ['Type 1', 'Type 2', 'Type 3', 'Type 4', 'Type 5']
+    # MODIFY
+    v4 = [1,2,3,4,5]
+    insert.name = v1[randrange(len(v1))]
+    insert.value = v2[randrange(len(v2))]
+    insert.type = v3[randrange(len(v3))]
+    insert.duration = v4[randrange(len(v4))]
+
+    insert.save()
+    return insert
+
+
+#######################
+# TIENEN DEPENDENCIAS #
+#######################
+
+def gen_Request():
+    insert = Request()
+    # MODIFY
+    v1 = ['03/02/2014', '03/02/2014', '03/02/2014', '03/02/2014', '03/02/2014']
+    # MODIFY
+    v2 = ['Action 1', 'Action 2', 'Action 3', 'Action 4', 'Action 5']
+    # MODIFY
+    v3 = ['10:20:45', '10:20:45', '10:20:45', '10:20:45', '10:20:45']
+    # NOT MODIFY
+    v4 = ['waitingRecipe', 'waitingForExecution', 'executing', 'feedback', 'error', 'complete']
+    insert.date = v1[randrange(len(v1))]
+    insert.action = v2[randrange(len(v2))]
+    insert.time = v3[randrange(len(v3))]
+    insert.status = v4[randrange(len(v4))]
+
+    # MODIFY?
+    rangeInit = 1
+    # MODIFY?
+    rangeEnd = 11
+
+    lista = []
+    for i in range(randrange(rangeInit,rangeEnd)):
+        lista.append(gen_Parameter())
+    insert.Parameters = lista
+
+    lista = []
+    for i in range(randrange(rangeInit,rangeEnd)):
+        lista.append(gen_Evaluation())
+    insert.Evaluations = lista
+
+    lista = []
+    for i in range(randrange(rangeInit,rangeEnd)):
+        lista.append(gen_Warningmsg())
+    insert.Warningmsgs = lista
+
+    insert.save()
+    return insert
+
+def gen_Eahouker():
+    insert = Eahouker()
+    # MODIFY
+    v1 = ['UserName 1', 'UserName 2', 'UserName 3', 'UserName 4', 'UserName 5']
+    # MODIFY
+    v2 = ['Password 1', 'Password 2', 'Password 3', 'Password 4', 'Password 5']
+    # MODIFY
+    v3 = ['03/02/2014', '03/02/2014', '03/02/2014', '03/02/2014', '03/02/2014']
+    # MODIFY
+    v4 = ['male', 'female', 'gay', 'lesbian', 'shemale', 'neutral', 'chaste', 'NA']
+    # MODIFY
+    v5 = [1,2,3,4,5]
+    # MODIFY
+    v6 = ['single', 'married', 'separated']
+
+    insert.userName = v1[randrange(len(v1))]
+    insert.pwd = v2[randrange(len(v2))]
+    insert.birthday = v3[randrange(len(v3))]
+    insert.sex = v4[randrange(len(v4))]
+    insert.numChildren = v5[randrange(len(v5))]
+    insert.socialStatus = v6[randrange(len(v6))]
+
+    # MODIFY?
+    rangeInit = 1
+    # MODIFY?
+    rangeEnd = 11
+
+    lista = []
+    for i in range(randrange(rangeInit,rangeEnd)):
+        lista.append(gen_Preference())
+    insert.Preference = lista
+
+    lista = []
+    for i in range(randrange(rangeInit,rangeEnd)):
+        lista.append(gen_Request())
+    insert.Request = lista
+
+    insert.save()
+    return insert
+
+
+def gen_Instruction():
+    insert = Instruction()
+    # MODIFY
+    v1 = ['Name 1', 'Name 2', 'Name 3', 'Name 4', 'Name 5']
+    # MODIFY
+    v2 = ['Value 1', 'Value 2', 'Value 3', 'Value 4', 'Value 5']
+    # MODIFY
+    v3 = ['Type 1', 'Type 2', 'Type 3', 'Type 4', 'Type 5']
+    # MODIFY
+    v4 = [1,2,3,4,5]
+
+    insert.name = v1[randrange(len(v1))]
+    insert.value = v2[randrange(len(v2))]
+    insert.type = v3[randrange(len(v3))]
+    insert.duration = v4[randrange(len(v4))]
+    insert.save()
+    return insert
+
+def gen_Recipe():
+    insert = Recipe()
+    # MODIFY
+    v1 = [1,2,3,4,5]
+    # MODIFY
+    v2 = [1.0,2.0,3.0,4.0,5.0]
+    # NOT MODIFY
+    v3 = [True, False]
+
+    insert.numExecutions = v1[randrange(len(v1))]
+    insert.qualityIndex = v2[randrange(len(v2))]
+    insert.isBasic = v3[randrange(len(v3))]
+
+    lista = []
+    for i in range(randrange(rangeInit,rangeEnd)):
+        lista.append(gen_Request())
+    insert.Requests = lista
+
+    lista = []
+    for i in range(randrange(rangeInit,rangeEnd)):
+        lista.append(gen_Instruction())
+    insert.Instructions = lista
+
+    insert.save()
+    return insert
+
 
 
 # Print 
@@ -95,3 +235,7 @@ for examples in Request.objects:
     print examples.date
     print examples.Evaluations 
     print examples.Warningmsgs
+
+for examples in Eahouker.objects:
+    print examples.Preference
+    print examples.Request 
