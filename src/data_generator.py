@@ -1,10 +1,23 @@
-from mongoengine import *
-import sys
-sys.path.append('/home/ayerdi/Escritorio/')
-from mongoengine_models import *
-# Falta el connect()
-# connect('user', host='123.456.789.012', username='user', password='password')
 
+import os
+import sys
+
+import socket
+hn = socket.gethostname()
+if hn == 'ayerdi':
+    sys.path.append('/home/ayerdi/Escritorio/')
+else:    
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    sys.path.append(os.path.join(basedir))
+
+from keys import host_ip, generator_db, \
+                 generator_user, generator_password
+
+connect(generator_db, host=host_ip, 
+        username=generator_user, password=generator_password)
+
+from mongoengine import *
+from mongoengine_models import *
 
 # Preference no depende de nadie
 insert = Preference()
