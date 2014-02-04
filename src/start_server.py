@@ -7,6 +7,8 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from eve_api import app
 
+from keys import log_dir
+
 def initialize_logger(output_dir):
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
@@ -28,7 +30,7 @@ try:
 except:
     port_no = 5000
 
-log = initialize_logger('/home/gicsands/projects/sands-edb')
+log = initialize_logger(log_dir)
 log.info('The process id of this is: ' + str(os.getpid()))
 log.info('Starting tornado server on ' + app.config['SERVER_NAME'])
 
