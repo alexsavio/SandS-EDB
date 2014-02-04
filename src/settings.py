@@ -1,6 +1,13 @@
 import socket
 import models
 
+import os
+import sys
+basedir = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(os.path.join(basedir))
+
+from keys import *
+
 #References:
 #http://python-eve.org/config.html
 
@@ -11,17 +18,15 @@ if hn == 'gicSands':
 
     # Please note that MONGO_HOST and MONGO_PORT could very well be left
     # out as they already default to a bare bones local 'mongod' instance.
-    MONGO_HOST = 'localhost'
+    MONGO_HOST = mongo_host
     MONGO_PORT = 27017
-    MONGO_USERNAME = 'sands'
-    MONGO_PASSWORD = 'unprepared ices false tripping'
+    MONGO_USERNAME = mongo_user
+    MONGO_PASSWORD = mongo_password
 
-    MONGO_DBNAME = 'sands'
+    MONGO_DBNAME = mongo_sands_db
 
     # let's not forget the API entry point
-    #SERVER_NAME = '158.227.113.136:8000'
-    #SERVER_NAME = 'api.sands-social-network-mockup.com:8000'
-    SERVER_NAME = '127.0.0.1:8000'
+    SERVER_NAME = localhost_server_name
     URL_PREFIX = 'api'
 
 elif hn == 'buccaneer':
@@ -29,15 +34,15 @@ elif hn == 'buccaneer':
 
     # Please note that MONGO_HOST and MONGO_PORT could very well be left
     # out as they already default to a bare bones local 'mongod' instance.
-    MONGO_HOST = 'localhost'
+    MONGO_HOST = mongo_host
     MONGO_PORT = 27017
-    MONGO_USERNAME = 'sands'
-    MONGO_PASSWORD = 'unprepared ices false tripping'
+    MONGO_USERNAME = mongo_user
+    MONGO_PASSWORD = mongo_password
 
-    MONGO_DBNAME = 'sands'
+    MONGO_DBNAME = mongo_sands_db
 
     # let's not forget the API entry point
-    SERVER_NAME = 'localhost:8000'
+    SERVER_NAME = localhost_server_name
     URL_PREFIX = 'api'
 
 elif hn == 'corsair':
@@ -45,15 +50,15 @@ elif hn == 'corsair':
 
     # Please note that MONGO_HOST and MONGO_PORT could very well be left
     # out as they already default to a bare bones local 'mongod' instance.
-    MONGO_HOST = 'localhost'
+    MONGO_HOST = mongo_host
     MONGO_PORT = 27017
-    MONGO_USERNAME = 'sands2'
-    MONGO_PASSWORD = 'unprepared ices false tripping'
+    MONGO_USERNAME = mongo_user
+    MONGO_PASSWORD = mongo_password
 
-    MONGO_DBNAME = 'sands'
+    MONGO_DBNAME = mongo_sands_db
 
     # let's not forget the API entry point
-    SERVER_NAME = 'localhost:8000'
+    SERVER_NAME = localhost_server_name
     URL_PREFIX = 'api'
 
 
