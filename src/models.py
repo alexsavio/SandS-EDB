@@ -133,7 +133,7 @@ Preference = {
             'type': 'string',
             'allowed': ['agree', 'neutral', 'disagree', 'partialAgree', 'partialDisagree'],
         },
-        'Eahouker' : {'type': 'objectid'},
+        #'Eahouker' : {'type': 'objectid'},
     },
 }
 DOMAIN['Preference'] = Preference
