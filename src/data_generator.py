@@ -9,6 +9,8 @@ from faker import Factory
 hn = socket.gethostname()
 if hn == 'ayerdi':
     sys.path.append('/home/ayerdi/Dropbox/SandS-EDB/repo/src')
+elif hn == 'MacBook-Air-de-Ayerdi.local':
+    sys.path.append('/Users/ayerdi/Desktop/Dropbox/SandS-EDB/repo/src')
 else:    
     basedir = os.path.abspath(os.path.dirname(__file__))
     sys.path.append(os.path.join(basedir))
