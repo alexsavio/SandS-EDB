@@ -5,7 +5,7 @@ import ujson
 from urlparse import urljoin
 from functools import partial
 
-from IPython.core.debugger import Tracer; debug_here = Tracer
+#from IPython.core.debugger import Tracer; debug_here = Tracer
 
 class SandsClient(object):
 
@@ -36,8 +36,6 @@ class SandsClient(object):
         """
         r = self._session.post(self._endpoint_url(url_suffix),
                                data=ujson.dumps(payload))
-
-        debug_here()
 
         try:
             resp = r.json()
