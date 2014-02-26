@@ -26,7 +26,7 @@ from random import randrange
 # NO TIENEN DEPENDENCIAS #
 ##########################
 
-def gen_Preference():
+def gen_Preference(Eahouker):
     insert = Preference()
     # MODIFY
     v1 = ['Criterion 1', 'Criterion 2', 'Criterion 3', 'Criterion 4', 'Criterion 5']
@@ -34,6 +34,7 @@ def gen_Preference():
     v2 = ['agree', 'neutral', 'disagree', 'partialAgree', 'partialDisagree']
     insert.criterion = v1[randrange(len(v1))]
     insert.value = v2[randrange(len(v2))]
+    insert.Eahouker = Eahouker
 
     insert.save()
     return insert
@@ -62,8 +63,8 @@ def gen_Evaluation():
     insert.save()
     return insert
 
-def gen_Warningmsg():
-    insert = Warningmsg()
+def gen_Warning():
+    insert = Warning()
     # MODIFY
     v1 = ['Message 1', 'Message 2', 'Message 3', 'Message 4', 'Message 5']
     # MODIFY
@@ -96,7 +97,7 @@ def gen_Instruction():
 # TIENEN DEPENDENCIAS #
 #######################
 
-def gen_Request():
+def gen_Request(Recipe):
     insert = Request()
     # MODIFY
     v1 = ['03/02/2014', '03/02/2014', '03/02/2014', '03/02/2014', '03/02/2014']
@@ -128,9 +129,11 @@ def gen_Request():
 
     lista = []
     for i in range(randrange(rangeInit,rangeEnd)):
-        lista.append(gen_Warningmsg())
-    insert.Warningmsgs = lista
+        lista.append(gen_Warning())
+    insert.Warnings = lista
 
+    insert.Recipe = Recipe
+    
     insert.save()
     return insert
 
@@ -143,7 +146,7 @@ def gen_Eahouker():
     # MODIFY
     v3 = ['03/02/2014', '03/02/2014', '03/02/2014', '03/02/2014', '03/02/2014']
     # MODIFY
-    v4 = ['male', 'female', 'gay', 'lesbian', 'shemale', 'neutral', 'chaste', 'NA']
+    v4 = ['male', 'female', 'gay', 'lesbian', 'shemale', 'neutral', 'chaste']
     # MODIFY
     v5 = [1,2,3,4,5]
     # MODIFY
@@ -163,13 +166,15 @@ def gen_Eahouker():
 
     lista = []
     for i in range(randrange(rangeInit,rangeEnd)):
-        lista.append(gen_Preference())
+        lista.append(gen_Preference(insert))
     insert.Preference = lista
 
     lista = []
     for i in range(randrange(rangeInit,rangeEnd)):
-        lista.append(gen_Request())
+        lista.append(gen_Request(insert))
     insert.Request = lista
+
+    insert.Location = gen_Location()
 
     insert.save()
     return insert
@@ -181,15 +186,9 @@ def gen_Instruction():
     v1 = ['Name 1', 'Name 2', 'Name 3', 'Name 4', 'Name 5']
     # MODIFY
     v2 = ['Value 1', 'Value 2', 'Value 3', 'Value 4', 'Value 5']
-    # MODIFY
-    v3 = ['Type 1', 'Type 2', 'Type 3', 'Type 4', 'Type 5']
-    # MODIFY
-    v4 = [1,2,3,4,5]
 
     insert.name = v1[randrange(len(v1))]
     insert.value = v2[randrange(len(v2))]
-    insert.type = v3[randrange(len(v3))]
-    insert.duration = v4[randrange(len(v4))]
     insert.save()
     return insert
 
@@ -206,10 +205,10 @@ def gen_Recipe():
     insert.qualityIndex = v2[randrange(len(v2))]
     insert.isBasic = v3[randrange(len(v3))]
 
-    lista = []
-    for i in range(randrange(rangeInit,rangeEnd)):
-        lista.append(gen_Request())
-    insert.Requests = lista
+    #lista = []
+    #for i in range(randrange(rangeInit,rangeEnd)):
+    #    lista.append(gen_Request(insert))
+    #insert.Requests = lista
 
     lista = []
     for i in range(randrange(rangeInit,rangeEnd)):
@@ -218,7 +217,11 @@ def gen_Recipe():
 
     insert.save()
     return insert
-
+    
+def gen_InstructionForAppliance()
+    insert = InstructionForAppliance()
+    insert.Instruction = gen_Instruction()
+    insert.range = 
 
 
 # Print 
@@ -234,7 +237,7 @@ for examples in Parameter.objects:
 for examples in Request.objects:
     print examples.date
     print examples.Evaluations 
-    print examples.Warningmsgs
+    print examples.Warnings
 
 for examples in Eahouker.objects:
     print examples.Preference
