@@ -28,12 +28,12 @@ js_bootstrap = Bundle('js/lib/bootstrap/bootstrap.min.js',
                       filters="jsmin", output="js/bootstrap_all.min.js")
 
 
-js_angular = Bundle('js/lib/angular/angular.min.js',
-                    filters="jsmin", output="js/angular_all.min.js")
+#js_angular = Bundle('js/lib/angular/angular.min.js',
+#                    filters="jsmin", output="js/angular_all.min.js")
 
 
-js_jquery = Bundle('js/lib/jquery/jquery-2.0.3.min.js',
-                   filters="jsmin", output="js/jquery_all.min.js")
+#js_jquery = Bundle('js/lib/jquery/jquery-2.0.3.min.js',
+#                   filters="jsmin", output="js/jquery_all.min.js")
 
 #: application js bundle
 #js_coffee = Bundle("coffee/.coffee"),

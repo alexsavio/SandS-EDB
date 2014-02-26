@@ -16,12 +16,9 @@ assets.init_app(app)
 @app.route("/", methods = ['GET', 'POST'])
 def home():
     rq_form = RequestForm(request.form)
+    if request.method == 'POST':
+        str(form.rq_text.data)
     return render_template('home.html', form=rq_form)
-
-@app.route("/show_request", methods = ['GET', 'POST'])
-def show_request():
-    form = RequestForm(request.form)
-    return str(form.rq_text.data)
 
 #app.run()
 
