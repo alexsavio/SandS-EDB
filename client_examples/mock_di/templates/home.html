@@ -67,10 +67,13 @@
         </script>
         </h1>
 
-        <form class="form-group" action="{{ url_for('root') }}">
+        <form class="form-group" method="post" name="get_request" action="{{ url_for('recipe') }}">
         {{form.hidden_tag()}}
             <div class="form-group">
-                {{form.rq_text}}
+                {{form.rq_text}}<br/>
+                {% for error in form.errors.openid %}
+                <span style="color: red;">[{{error}}]</span>
+                {% endfor %}<br>
                 <button class="btn btn-large btn-primary" type="submit">Get recipe</button>
             </div>
         </form>

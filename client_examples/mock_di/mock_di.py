@@ -13,12 +13,19 @@ app.config.from_pyfile('settings.py')
 
 assets.init_app(app)
 
-@app.route("/", methods = ['GET', 'POST'])
+@app.route("/")
 def home():
-    rq_form = RequestForm(request.form)
-    if request.method == 'POST':
-        str(form.rq_text.data)
-    return render_template('home.html', form=rq_form)
+    form = RequestForm()
+    return render_template('home.html', form=form)
+
+@app.route("/recipe", methods = ['GET', 'POST'])
+def recipe():
+    form = RequestForm()
+    if form.validate_on_submit():
+        #request.values['rq_text']
+        return str(form.rq_text.data)
+
+    return render_template('home.html', form=form)
 
 #app.run()
 
