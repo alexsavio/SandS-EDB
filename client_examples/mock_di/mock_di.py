@@ -24,12 +24,11 @@ def home():
 def recipe():
     form = RequestForm()
     if form.validate_on_submit():
+        recipe = sands_client.ask_for_recipe(form.rq_text.data)
         #request.values['rq_text']
-        return str(form.rq_text.data)
+        return str('show_recipe.html', recipe=recipe)
 
     return render_template('home.html', form=form)
-
-
 
 
 def start_sands_client():

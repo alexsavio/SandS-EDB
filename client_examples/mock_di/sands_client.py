@@ -125,3 +125,13 @@ class SandsClient(object):
         :param return: request
         """
         return self.get(url_suffix + '/' + object_id)
+
+    #TODO
+    def ask_for_recipe(self, description):
+        """
+        :param description: string
+
+        :return: string
+        Recipe JSON string
+        """
+        return 'recipe1'
