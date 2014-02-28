@@ -10,17 +10,36 @@ from functools import partial
 class SandsClient(object):
 
     def __init__(self, base_url, auth, headers):
+        """
+        Sands Client class constructor.
+
+        :param base_url: string
+         Base URL of the Sands API
+
+        :param auth: 2-tuple of strings
+         First username, second password, e.g.,
+         ('alexandre', 'alex has no account')
+
+        :param headers: dict
+        HTTP request headers, e.g.,
+        json_hdrs = {'content-type': 'application/json',
+                     'accept': 'application/json'}
+
+        xml_hdrs = {'content-type': 'application/xml',
+                    'accept': 'application/xml'}
+        """
         self._api_url = base_url
         self._auth = auth
         self._headers = headers
         self._endpoint_url = partial(urljoin, self._api_url)
 
         self._session = requests.Session()
-        self.update_session()
+        self._update_session()
 
-    def update_session(self):
+    def _update_session(self):
         """
-
+        Resets the auth and headers values in self._session,
+        in case they have been changed.
         """
         self._session.auth = self._auth
         self._session.headers = self._headers
