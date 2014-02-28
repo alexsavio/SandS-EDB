@@ -8,6 +8,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 
+sands_client = start_sands_client()
+
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
 
@@ -28,18 +30,17 @@ def recipe():
     return render_template('home.html', form=form)
 
 
+
+
 def start_sands_client():
-    from keys import sands_di_user, sands_di_password
+    """
 
-    from sands_client import SandsClient
+    :return: SandsClient
+    SandsClient for DI
+    """
+    from keys import sands_di_user, sands_di_password, sands_url
 
-    #sands_url = 'http://localhost:5000/api/'
-    #SERVER_NAME = '158.227.113.136:8080'
-    #SERVER_NAME = 'api.sands-social-network-mockup.com:8080'
-
-    sands_url = 'http://api.sands-social-network-mockup.com:8080/api/'
-
-    sands_auth = (sands_user, sands_password1)
+    sands_auth = (sands_di_user, sands_di_password)
 
     req_json_hdrs = {'content-type': 'application/json'}
     req_xml_hdrs = {'content-type': 'application/xml'}
@@ -51,12 +52,9 @@ def start_sands_client():
     my_headers.update(req_json_hdrs)
     my_headers.update(resp_json_hdrs)
 
-    #r = requests.get(sands_url + 'Evaluation', auth=sands_auth, headers=my_headers)
+    return SandsClient(sands_url, sands_auth, my_headers)
 
 
-    #Sands Client
-    sands_client = SandsClient(sands_url, sands_auth, my_headers)
-#app.run()
 
 if __name__ == "__main__":
      app.run()
