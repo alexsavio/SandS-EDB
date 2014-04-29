@@ -61,6 +61,23 @@ elif hn == 'corsair':
     SERVER_NAME = localhost_server_name
     URL_PREFIX = 'api'
 
+elif hn == 'ns3366758':
+    # Running on local machine. Let's just use the local mongod instance.
+
+    # Please note that MONGO_HOST and MONGO_PORT could very well be left
+    # out as they already default to a bare bones local 'mongod' instance.
+    MONGO_HOST = mongo_host
+    MONGO_PORT = 27017
+    MONGO_USERNAME = mongo_user
+    MONGO_PASSWORD = mongo_password
+
+    MONGO_DBNAME = mongo_sands_db
+
+    # let's not forget the API entry point
+    SERVER_NAME = localhost_server_name
+    URL_PREFIX = 'api'
+
+
 
 #http://python-eve.org/features.html#hateoas-feature
 HATEOAS = False

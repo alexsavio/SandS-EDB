@@ -9,3 +9,18 @@ https://pypi.python.org/pypi/jsonschema
 https://github.com/bcwaldon/warlock
 http://tox.readthedocs.org/en/latest/
 http://python-eve.org/
+
+#NGINX CONFIGURATION
+https://www.digitalocean.com/community/articles/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-12-04
+
+Summary:
+- Edit /etc/php/php-fpm/php.ini
+ cgi.fix_pathinfo = 0;
+ extension=mongo.so
+
+- Edit /etc/php5/fpm/pool.d/www.conf
+ listen = /var/run/php5-fpm.sock 
+
+- Install PHP-Mongo driver
+sudo apt-get install php-pear
+sudo pecl install mongo
